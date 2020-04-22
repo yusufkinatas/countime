@@ -29,54 +29,45 @@ function Timer(props) {
       }
     };
 
-    if (timerData) {
-      const { endsAt, pausedAt } = timerData;
-
-      if (!remainingSeconds) {
-        const now = new Date().getTime();
-
-        let newRemainingSeconds = pausedAt
-          ? Math.round((endsAt - pausedAt) / 1000)
-          : Math.round((endsAt - now) / 1000);
-
-        if (newRemainingSeconds < 0) newRemainingSeconds = 0;
-
-        setRemainingSeconds(newRemainingSeconds);
-      } else {
-        //if data changed while remainingSecs exists
-
-        //try to pause if pausedAt exists
-        if (pausedAt) {
-          clearTickInterval();
-        } else if (remainingSeconds > 0) {
-          startTickInterval();
-        }
-      }
-    } else {
-      clearTickInterval();
-      setRemainingSeconds(null);
-    }
-  }, [timerData]);
-
-  useEffect(() => {
-    const startTickInterval = () => {
-      if (!tickInterval) {
-        tickInterval = setInterval(() => {
-          setRemainingSeconds(r => r - 1);
-        }, 1000);
-      }
+    const setRemainingSecondsAndStartTickInterval = s => {
+      setRemainingSeconds(s);
+      startTickInterval();
     };
 
+    const clearTickAndReset = () => {
+      setRemainingSeconds(null);
+      clearTickInterval();
+    };
+
+    if (!timerData) {
+      //no timerData
+      clearTickAndReset();
+    } else if (timerData && !remainingSeconds) {
+      //timerData exists and no remainingSeconds
+      const { endsAt, pausedAt } = timerData;
+      const now = new Date().getTime();
+
+      let newRemainingSeconds = pausedAt
+        ? Math.round((endsAt - pausedAt) / 1000)
+        : Math.round((endsAt - now) / 1000);
+
+      if (newRemainingSeconds < 0) newRemainingSeconds = 0;
+
+      setRemainingSecondsAndStartTickInterval(newRemainingSeconds);
+    } else if (timerData && !timerData.pausedAt && remainingSeconds) {
+      //timerData exists, not paused, remainingSeconds > 0
+      startTickInterval();
+    } else if (timerData.pausedAt || remainingSeconds === 0) {
+      //paused or remainingSeconds == 0
+      clearTickInterval();
+    }
+  }, [timerData, remainingSeconds]);
+
+  useEffect(() => {
     if (typeof remainingSeconds === 'number') {
       document.title = formatSeconds(remainingSeconds);
     }
-
-    if (remainingSeconds > 0 && timerData && !timerData.pausedAt) {
-      startTickInterval();
-    } else {
-      clearTickInterval();
-    }
-  }, [remainingSeconds, timerData]);
+  }, [remainingSeconds]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
