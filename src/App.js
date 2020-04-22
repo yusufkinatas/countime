@@ -118,7 +118,7 @@ function App() {
             />
             <button onClick={selectTimer}>Select</button>
             <div>
-              <h5>Recent Timers</h5>
+              <h5>RECENT TIMERS</h5>
               {[...recentTimers].reverse().map(t => (
                 <div key={t} onClick={() => setSelectedTimerName(t)}>
                   {t}
