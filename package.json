@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "merge": "git fetch . dev:master && git push origin master:master",
+    "merge": "git fetch . dev:master && git push origin master:master"
   },
   "eslintConfig": {
     "extends": "react-app"
