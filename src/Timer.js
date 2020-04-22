@@ -13,7 +13,6 @@ const clearTickInterval = () => {
 function Timer(props) {
   const { timerData, name, goBack } = props;
   const [remainingSeconds, setRemainingSeconds] = useState(null);
-  const [paused, setPaused] = useState(false);
   const [selectedInput, setSelectedInput] = useState('h'); //h-m-s
   const [timeInputs, setTimeInputs] = useState({ h: 0, m: 0, s: 0 });
 
@@ -22,53 +21,62 @@ function Timer(props) {
   const inputtedSeconds = timeInputs.h * 3600 + timeInputs.m * 60 + timeInputs.s;
 
   useEffect(() => {
+    const startTickInterval = () => {
+      if (!tickInterval) {
+        tickInterval = setInterval(() => {
+          setRemainingSeconds(r => r - 1);
+        }, 1000);
+      }
+    };
+
     if (timerData) {
       const { endsAt, pausedAt } = timerData;
-
-      setPaused(!!pausedAt);
 
       if (!remainingSeconds) {
         const now = new Date().getTime();
 
-        const _remainingSeconds = pausedAt
+        let newRemainingSeconds = pausedAt
           ? Math.round((endsAt - pausedAt) / 1000)
           : Math.round((endsAt - now) / 1000);
-        setRemainingSeconds(_remainingSeconds < 0 ? 0 : _remainingSeconds);
+
+        if (newRemainingSeconds < 0) newRemainingSeconds = 0;
+
+        setRemainingSeconds(newRemainingSeconds);
+      } else {
+        //if data changed while remainingSecs exists
+
+        //try to pause if pausedAt exists
+        if (pausedAt) {
+          clearTickInterval();
+        } else if (remainingSeconds > 0) {
+          startTickInterval();
+        }
       }
     } else {
       clearTickInterval();
-      clearTimeInput();
       setRemainingSeconds(null);
     }
   }, [timerData]);
 
   useEffect(() => {
-    console.log('remainingSeconds', remainingSeconds);
+    const startTickInterval = () => {
+      if (!tickInterval) {
+        tickInterval = setInterval(() => {
+          setRemainingSeconds(r => r - 1);
+        }, 1000);
+      }
+    };
 
     if (typeof remainingSeconds === 'number') {
       document.title = formatSeconds(remainingSeconds);
     }
 
     if (remainingSeconds > 0 && timerData && !timerData.pausedAt) {
-      if (!tickInterval) {
-        tickInterval = setInterval(() => {
-          setRemainingSeconds(r => r - 1);
-        }, 1000);
-      }
+      startTickInterval();
     } else {
       clearTickInterval();
     }
-  }, [remainingSeconds]);
-
-  useEffect(() => {
-    if (paused) {
-      clearTickInterval();
-    } else if (remainingSeconds > 0 && !tickInterval) {
-      tickInterval = setInterval(() => {
-        setRemainingSeconds(r => r - 1);
-      }, 1000);
-    }
-  }, [paused]);
+  }, [remainingSeconds, timerData]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
@@ -90,6 +98,7 @@ function Timer(props) {
   const startTimerWithInputtedTime = () => {
     if (inputtedSeconds > 0) {
       startTimer(inputtedSeconds);
+      clearTimeInput();
     }
   };
 
