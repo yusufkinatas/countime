@@ -3,11 +3,11 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import formatSeconds from 'utils/formatSeconds';
 
-let tickTimeout;
+let tickInterval;
 
-const clearTickTimeout = () => {
-  clearTimeout(tickTimeout);
-  tickTimeout = null;
+const clearTickInterval = () => {
+  clearInterval(tickInterval);
+  tickInterval = null;
 };
 
 function Timer(props) {
@@ -36,33 +36,36 @@ function Timer(props) {
         setRemainingSeconds(_remainingSeconds < 0 ? 0 : _remainingSeconds);
       }
     } else {
-      clearTickTimeout();
+      clearTickInterval();
       clearTimeInput();
       setRemainingSeconds(null);
     }
   }, [timerData]);
 
   useEffect(() => {
-    console.log('saniye şeysi!');
+    console.log('remainingSeconds', remainingSeconds);
 
     if (typeof remainingSeconds === 'number') {
       document.title = formatSeconds(remainingSeconds);
     }
-    if (remainingSeconds > 0) {
-      if (timerData && !timerData.pausedAt) {
-        tickTimeout = setTimeout(() => {
-          setRemainingSeconds(remainingSeconds - 1);
+
+    if (remainingSeconds > 0 && timerData && !timerData.pausedAt) {
+      if (!tickInterval) {
+        tickInterval = setInterval(() => {
+          setRemainingSeconds(r => r - 1);
         }, 1000);
       }
+    } else {
+      clearTickInterval();
     }
   }, [remainingSeconds]);
 
   useEffect(() => {
     if (paused) {
-      clearTickTimeout();
-    } else if (remainingSeconds > 0 && !tickTimeout) {
-      tickTimeout = setTimeout(() => {
-        setRemainingSeconds(remainingSeconds - 1);
+      clearTickInterval();
+    } else if (remainingSeconds > 0 && !tickInterval) {
+      tickInterval = setInterval(() => {
+        setRemainingSeconds(r => r - 1);
       }, 1000);
     }
   }, [paused]);
@@ -97,14 +100,14 @@ function Timer(props) {
   const clearTimer = async () => {
     if (timerData.pin) return alert('LOCKED');
 
-    clearTickTimeout();
+    clearTickInterval();
     await databaseRef.remove();
   };
 
   const pauseTimer = () => {
     if (timerData.pin) return alert('LOCKED');
 
-    clearTickTimeout();
+    clearTickInterval();
     databaseRef.update({
       pausedAt: new Date().getTime(),
     });
@@ -121,7 +124,7 @@ function Timer(props) {
   };
 
   const handleOnBackPress = () => {
-    clearTickTimeout();
+    clearTickInterval();
     goBack();
   };
 
