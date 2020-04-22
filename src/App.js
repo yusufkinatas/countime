@@ -23,24 +23,26 @@ function App() {
           const timerData = snapshot.val();
 
           setTimerData(timerData);
-          if (!timerVisible) setTimerVisible(true);
+          setTimerVisible(true);
         });
       setTimerName('');
 
-      if (recentTimers.includes(selectedTimerName)) {
-        const foundIndex = recentTimers.indexOf(selectedTimerName);
-        const clone = [...recentTimers];
-        clone.splice(foundIndex, 1);
+      setRecentTimers(rt => {
+        if (rt.includes(selectedTimerName)) {
+          const foundIndex = rt.indexOf(selectedTimerName);
+          const clone = [...rt];
+          clone.splice(foundIndex, 1);
 
-        setRecentTimers([...clone, selectedTimerName]);
-      } else {
-        const rememberCount = 3;
-        if (recentTimers.length >= rememberCount) {
-          setRecentTimers([...recentTimers.slice(1, rememberCount), selectedTimerName]);
+          return [...clone, selectedTimerName];
         } else {
-          setRecentTimers([...recentTimers, selectedTimerName]);
+          const rememberCount = 3;
+          if (rt.length >= rememberCount) {
+            return [...rt.slice(1, rememberCount), selectedTimerName];
+          } else {
+            return [...rt, selectedTimerName];
+          }
         }
-      }
+      });
 
       window.history.replaceState({}, document.title, '/?timer=' + selectedTimerName);
     } else {
