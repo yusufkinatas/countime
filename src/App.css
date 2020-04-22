@@ -1,0 +1,124 @@
+.App {
+  text-align: center;
+  cursor: default;
+}
+
+::selection {
+  background-color: transparent;
+}
+
+button {
+  padding: 30px;
+  background: white;
+  margin-bottom: 10px;
+  font-size: 23px;
+  font-weight: bold;
+  width: 50vw;
+  outline: none;
+  border: none;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+.disabled {
+  background: #aaa;
+  opacity: 1 !important;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer {
+  font-size: 100px;
+  margin-bottom: 50px;
+}
+
+.time-input-container {
+  font-size: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.time-input-container .selected {
+  background: white;
+  color: #282c34;
+}
+
+.loader {
+  position: absolute;
+  background: #000c;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.timerdata {
+  position: fixed;
+  bottom: 10px;
+}
+
+.back-button {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  top: 10px;
+  left: 10px;
+  background: #0007;
+  border:none;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.number-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 1000px;
+}
+
+.number-buttons * {
+  background: white;
+  color: #282c34;
+  font-size: 30px;
+  font-weight: bold;
+  width: 18%;
+  height: 60px;
+  margin-bottom: 2%;  
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding:0; 
+}
+
