@@ -3,7 +3,7 @@ import './App.css';
 import './initialize';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import Timer from 'Timer';
+import Timer from 'components/Timer';
 import parseQueryString from 'utils/parseQueryString';
 
 function App() {
@@ -120,14 +120,14 @@ function App() {
               <h4>Have your timer on any online device</h4>
             </div>
 
-            {/* <div>
-              <h5>RECENT TIMERS</h5>
+            <div className="recent-timers">
+              <label>Recent Timers</label>
               {[...recentTimers].reverse().map(t => (
-                <div key={t} onClick={() => setSelectedTimerName(t)}>
+                <button key={t} onClick={() => setSelectedTimerName(t)}>
                   {t}
-                </div>
+                </button>
               ))}
-            </div> */}
+            </div>
 
             <div className="name-input">
               <label className="label">Create a shareable timer</label>
@@ -136,7 +136,7 @@ function App() {
                 className="input"
                 onChange={handleInputChange}
                 value={timerName}
-                placeholder="my-timer"
+                placeholder="type anything"
                 onKeyDown={handleInputKeyDown}
               />
               <button className="btn-select" onClick={selectTimer} />

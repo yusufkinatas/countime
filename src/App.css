@@ -1,6 +1,8 @@
 :root {
   --clr-bg: #fff;
   --clr-bg2: #f0be77;
+  --clr-bg2-dark: #f0aa48;
+  --clr-bg2-darker: #de932a;
   --clr-text: #0c0c0c;
   --clr-text2: #919191; 
 }
@@ -35,23 +37,29 @@ button {
   padding: 0px 16px;
   height: 40px;
   line-height: 1em;
-  background: var(--clr-bg);
-  border: 2px solid var(--clr-bg2);
   border-radius: 8px;
-  color: var(--clr-bg2);
+  color: var(--clr-bg);
   margin-bottom: 10px;
   font-size: 30px;
   outline: none;
+  opacity: 1;
+  transition: 200ms all;
+  cursor: pointer;
+  background: var(--clr-bg2);
+  border: none;
 }
 
+button:hover {
+  background: var(--clr-bg2-dark);
+}
 button:active {
-  opacity: 0.8;
+  background: var(--clr-bg2-darker);
 }
 
 .disabled {
-  background: darkgray;
-  opacity: 1 !important;
+  background: darkgray !important;
 }
+
 
 div {
   display: flex;
@@ -103,9 +111,32 @@ div {
   font-weight: 300;
 }
 
+/* RECENT TIMERS */
+.recent-timers {
+  display: block;
+  width: 97%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.recent-timers label {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.recent-timers button {  
+  margin: 4px 8px 0 0;
+  padding: 4px 8px;
+  height: unset;
+  font-size: .8em;
+}
+
 /* TIMER NAME INPUT */
 .name-input {
-  margin-top: 10px;
   display: block;
   width: 97%;
   text-align: left;
@@ -147,8 +178,6 @@ div {
   float: right;
   margin-top: 10px;
   margin-right: 3%;
-  background: var(--clr-bg2);
-  border: none;
 }
 
 .name-input .btn-select::before {
@@ -157,38 +186,6 @@ div {
   background: url(./assets/arrow-right.svg) 50% 50% no-repeat;
   width: 60px;
   height: 100%;
-}
-
-/* ABOUT ME */
-.about-me-handle {
-  position: absolute;
-  bottom: 0;
-  height: 30px;
-}
-
-/* TIMER */
-.timer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.timer {
-  font-size: 100px;
-  margin-bottom: 50px;
-}
-
-.time-input-container {
-  font-size: 100px;
-  margin-bottom: 50px;
-  display: flex;
-  flex-direction: row;
-}
-
-.time-input-container .selected {
-  background: var(--clr-text);
-  color: var(--clr-bg);
 }
 
 .loader {
@@ -203,41 +200,9 @@ div {
   font-size: 50px;
 }
 
-.timerdata {
-  position: fixed;
-  bottom: 10px;
+/* ABOUT ME */
+.about-me-handle {
+  position: absolute;
+  bottom: 0;
+  height: 30px;
 }
-
-.back-button {
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  top: 10px;
-  left: 10px;
-  border:none;
-  font-size: 30px;
-}
-
-.number-buttons {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.number-buttons * {
-  background: var(--clr-text);
-  color: var(--clr-bg);
-  font-size: 30px;
-  width: 18%;
-  height: 60px;
-  margin-bottom: 2%;  
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  padding:0; 
-}
-

@@ -3,6 +3,8 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import formatSeconds from 'utils/formatSeconds';
 
+import './Timer.css';
+
 let tickInterval;
 
 const clearTickInterval = () => {
