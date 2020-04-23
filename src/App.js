@@ -104,29 +104,45 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        {Boolean(!timerVisible && selectedTimerName) && <div className="loader">LOADING</div>}
-
+      {Boolean(!timerVisible && selectedTimerName) && <div className="loader">LOADING</div>}
+      <header className="App-container">
         {timerVisible ? (
           <Timer name={selectedTimerName} timerData={timerData} goBack={goBack} />
         ) : (
-          <div>
-            <input
-              onChange={handleInputChange}
-              value={timerName}
-              placeholder="timer name"
-              autoFocus
-              onKeyDown={handleInputKeyDown}
-            />
-            <button onClick={selectTimer}>Select</button>
-            <div>
+          <div className="landing">
+            <div className="title">
+              <div className="title-logo" />
+              <div className="title-text">Your online timer</div>
+            </div>
+
+            <div className="langing-content">
+              <h2>Welcome to Countime</h2>
+              <h4>Have your timer on any online device</h4>
+            </div>
+
+            {/* <div>
               <h5>RECENT TIMERS</h5>
               {[...recentTimers].reverse().map(t => (
                 <div key={t} onClick={() => setSelectedTimerName(t)}>
                   {t}
                 </div>
               ))}
+            </div> */}
+
+            <div className="name-input">
+              <label className="label">Create a shareable timer</label>
+              <label className="prefix">Timer name:</label>
+              <input
+                className="input"
+                onChange={handleInputChange}
+                value={timerName}
+                placeholder="my-timer"
+                onKeyDown={handleInputKeyDown}
+              />
+              <button className="btn-select" onClick={selectTimer} />
             </div>
+
+            <div className="about-me-handle">About Me</div>
           </div>
         )}
       </header>
