@@ -188,18 +188,6 @@ div {
   height: 100%;
 }
 
-.loader {
-  position: absolute;
-  z-index: 99;
-  background: #000c;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
-}
-
 /* ABOUT ME */
 .about-me-handle {
   position: absolute;

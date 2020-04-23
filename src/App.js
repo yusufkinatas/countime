@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import Timer from 'components/Timer';
 import parseQueryString from 'utils/parseQueryString';
+import LoadingOverlay from 'components/LoadingOverlay';
 
 function App() {
   const [selectedTimerName, setSelectedTimerName] = useState(null);
@@ -104,7 +105,7 @@ function App() {
 
   return (
     <div className="App">
-      {Boolean(!timerVisible && selectedTimerName) && <div className="loader">LOADING</div>}
+      <LoadingOverlay loading={Boolean(!timerVisible && selectedTimerName)} />
       <header className="App-container">
         {timerVisible ? (
           <Timer name={selectedTimerName} timerData={timerData} goBack={goBack} />
