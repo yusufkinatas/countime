@@ -6,6 +6,7 @@ import 'firebase/database';
 import Timer from 'components/Timer';
 import parseQueryString from 'utils/parseQueryString';
 import LoadingOverlay from 'components/LoadingOverlay';
+import AboutMe from 'components/AboutMe';
 
 function App() {
   const [selectedTimerName, setSelectedTimerName] = useState(null);
@@ -143,7 +144,7 @@ function App() {
               <button className="btn-select" onClick={selectTimer} />
             </div>
 
-            <div className="about-me-handle">About Me</div>
+            <AboutMe />
           </div>
         )}
       </header>
