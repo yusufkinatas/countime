@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './AboutMe.css';
 
 function AboutMe() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const toggle = () => setVisible(!visible);
 
