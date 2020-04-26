@@ -54,6 +54,7 @@ button {
   cursor: pointer;
   background: var(--clr-bg2);
   border: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 button:hover {
