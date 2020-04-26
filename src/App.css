@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 22px;
+  font-size: 4.5vw;
   color: var(--clr-text);
   width: 100%;
   max-width: 600px;
@@ -34,14 +34,20 @@
   overflow: scroll;
 }
 
+@media (min-width: 600px) {
+  .App-container {
+    font-size: 27px !important;
+  }
+}
+
 button {
-  padding: 0px 16px;
-  height: 40px;
+  padding: 0 .75em;
+  height: 1.4em;
   line-height: 1em;
-  border-radius: 8px;
+  border-radius: .3em;
   color: var(--clr-bg);
-  margin-bottom: 10px;
-  font-size: 30px;
+  margin-bottom: .3em;
+  font-size: 1.4em;
   outline: none;
   opacity: 1;
   transition: 200ms all;
@@ -76,11 +82,12 @@ div {
 /* LANDING TITLE */ 
 .title {
   width: 80%;
-  margin-top: 30px;
+  margin-top: 1.4em;
 }
 
 .title-logo {
   height: 70px;
+  height: 2.5em;
   width: 100%;
   background: url(assets/logo-full.svg) no-repeat center;
   background-size: contain; 
@@ -88,8 +95,8 @@ div {
 
 .title-text {
   font-weight: 300;
-  font-size: 24px;
-  margin-top: 10px;
+  font-size: 1.1em;
+  margin-top: 0.45em;
   text-transform: uppercase;
 
 }
@@ -98,13 +105,13 @@ div {
 .landing-content {
   flex:1;
   justify-content: center;
-  padding: 0 10px;
+  padding: 0 0.45em;
   
 }
 
 .landing-content h2 {
   font-weight: 300;
-  margin-bottom:10px;
+  margin-bottom: 0.45em;
 }
 
 .landing-content h4 {
@@ -117,12 +124,12 @@ div {
   display: block;
   width: 95%;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 0.9em;
 }
 
 .recent-timers label {
   display: inline-block;
-  font-size: 18px;
+  font-size: .7em;
   font-weight: 500;
   letter-spacing: .1em;
   width: 100%;
@@ -130,8 +137,8 @@ div {
 }
 
 .recent-timers button {  
-  margin: 4px 8px 0 0;
-  padding: 4px 8px;
+  margin: 0.2em 0.4em 0 0;
+  padding: 0.2em 0.4em;
   height: unset;
   font-size: .8em;
 }
@@ -141,13 +148,13 @@ div {
   display: block;
   width: 95%;
   text-align: left;
-  margin-bottom: 70px;
+  margin-bottom: 3.2em;
 }
 
 .name-input .label {
   display: block;
   float: left;
-  font-size: 18px;
+  font-size: .7em;
   font-weight: 500;
   letter-spacing: .1em;
   width: 100%;
@@ -155,20 +162,20 @@ div {
 }
 
 .name-input .prefix {
-  font-size: 24px;
+  font-size: 1em;
   display: inline-block;
-  width: 160px;
+  width: 7em;
 }
 
 .name-input .input {
   display: inline-block;
-  font-size: 28px;
-  width: calc(95% - 160px);
+  font-size: 1em;
+  width: calc(95% - 7em);
   color: var(--clr-bg2) !important;
 
 
   border: none;
-  border-bottom: 1px solid var(--clr-text2);
+  border-bottom: .01em solid var(--clr-text2);
   outline: none;
 }
 ::placeholder {
@@ -177,7 +184,7 @@ div {
 
 .name-input .btn-select {
   float: right;
-  margin-top: 10px;
+  margin-top: .4em;
   margin-right: 3%;
 }
 
@@ -185,6 +192,7 @@ div {
   content: "";
   display: inline-block;
   background: url(./assets/arrow-right.svg) 50% 50% no-repeat;
-  width: 60px;
+  width: 2em;
+  background-size: contain;
   height: 100%;
 }
