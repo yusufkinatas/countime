@@ -21,3 +21,12 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+const setRealViewportHeight = () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+setRealViewportHeight();
+
+window.addEventListener('resize', setRealViewportHeight);

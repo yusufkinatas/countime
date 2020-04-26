@@ -117,7 +117,7 @@ function App() {
               <div className="title-text">Your online timer</div>
             </div>
 
-            <div className="langing-content">
+            <div className="landing-content">
               <h2>Welcome to Countime</h2>
               <h4>Have your timer on any online device</h4>
             </div>
