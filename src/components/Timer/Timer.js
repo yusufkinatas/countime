@@ -4,6 +4,7 @@ import 'firebase/database';
 import formatSeconds from 'utils/formatSeconds';
 
 import './Timer.css';
+import getTimeValues from 'utils/getTimeValues';
 
 let tickInterval;
 
@@ -256,7 +257,7 @@ function Timer(props) {
     return (
       <div
         onClick={() => setSelectedInput(type)}
-        className={selectedInput === type ? 'selected' : ''}>
+        className={type + (selectedInput === type ? ' selected' : '')}>
         {String(timeInputs[type]).padStart(2, '0')}
       </div>
     );
@@ -301,7 +302,11 @@ function Timer(props) {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <div className="timer">{formatSeconds(remainingSeconds)}</div>
+              <div className="time-container">
+                <div className="h">{getTimeValues(remainingSeconds).hours}</div>:
+                <div className="m">{getTimeValues(remainingSeconds).mins}</div>:
+                <div className="s">{getTimeValues(remainingSeconds).secs}</div>
+              </div>
               <button
                 className="big-button"
                 onClick={timerData.pausedAt ? resumeTimer : pauseTimer}>
@@ -316,7 +321,7 @@ function Timer(props) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="time-input-container">
+          <div className="time-container">
             {renderTimeInput('h')}:{renderTimeInput('m')}:{renderTimeInput('s')}
           </div>
           <div className="number-buttons">

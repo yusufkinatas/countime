@@ -6,20 +6,37 @@
   width: 100%;
 }
 
-.timer {
-  font-size: 4em;
-  margin-bottom: 1em;
-}
 
-.time-input-container {
+.time-container {
   font-size: 4em;
   margin-bottom: 1em;
   display: flex;
   flex-direction: row;
 }
 
-.time-input-container .selected {
-  background: var(--clr-text);
+.time-container > div {
+  width: 1.4em;
+}
+
+.time-container > .h::after {
+  content: "Hours";
+  font-size: .3em;
+  margin-top: -.5em;
+}
+.time-container > .m::after {
+  content: "Minutes";
+  font-size: .3em;
+  margin-top: -.5em;
+}
+.time-container > .s::after {
+  content: "Seconds";
+  font-size: .3em;
+  margin-top: -.5em;
+}
+
+.time-container .selected {
+  background: var(--clr-bg2-darker);
+  border-radius: .1em;
   color: var(--clr-bg);
 }
 
