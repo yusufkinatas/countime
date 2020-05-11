@@ -7,6 +7,9 @@ import './Timer.css';
 
 let tickInterval;
 
+const bell = new Audio('/bell.mp3');
+bell.loop = true;
+
 const clearTickInterval = () => {
   clearInterval(tickInterval);
   tickInterval = null;
@@ -25,8 +28,16 @@ function Timer(props) {
   useEffect(() => {
     const startTickInterval = () => {
       if (!tickInterval) {
+        bell.pause();
         tickInterval = setInterval(() => {
-          setRemainingSeconds(r => r - 1);
+          let alarmed = false;
+          setRemainingSeconds(r => {
+            if (r === 1 && !alarmed) {
+              bell.play();
+              alarmed = true;
+            }
+            return r - 1;
+          });
         }, 1000);
       }
     };
@@ -42,9 +53,11 @@ function Timer(props) {
     };
 
     if (!timerData) {
+      bell.pause();
       //no timerData
+
       clearTickAndReset();
-    } else if (timerData && !remainingSeconds) {
+    } else if (timerData && remainingSeconds === null) {
       //timerData exists and no remainingSeconds
       const { endsAt, pausedAt } = timerData;
       const now = new Date().getTime();
@@ -77,6 +90,12 @@ function Timer(props) {
       document.removeEventListener('keydown', handleKeyPress);
     };
   });
+
+  useEffect(() => {
+    return () => {
+      bell.pause();
+    };
+  }, []);
 
   const startTimer = async seconds => {
     await databaseRef.set({
