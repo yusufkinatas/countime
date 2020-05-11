@@ -281,9 +281,9 @@ function Timer(props) {
 
   const renderSecurityButton = () => {
     if (timerData.pin) {
-      return <button onClick={unlockTimer}>Unlock</button>;
+      return <button className="security-button unlock" onClick={unlockTimer} />;
     }
-    return <button onClick={lockTimer}>Lock</button>;
+    return <button className="security-button lock " onClick={lockTimer} />;
   };
 
   return (
@@ -295,18 +295,24 @@ function Timer(props) {
           {remainingSeconds === 0 ? (
             <div>
               <div className="timer">TIME'S UP</div>
-              <button onClick={restartTimer}>Restart ({timerData.duration})</button>
+              <button className="big-button" onClick={restartTimer}>
+                Restart ({timerData.duration})
+              </button>
             </div>
           ) : (
-            <div>
+            <React.Fragment>
               <div className="timer">{formatSeconds(remainingSeconds)}</div>
-              <button onClick={timerData.pausedAt ? resumeTimer : pauseTimer}>
+              <button
+                className="big-button"
+                onClick={timerData.pausedAt ? resumeTimer : pauseTimer}>
                 {timerData.pausedAt ? 'Resume' : 'Pause'}
               </button>
               {renderSecurityButton()}
-            </div>
+            </React.Fragment>
           )}
-          <button onClick={clearTimer}>Clear</button>
+          <button className="big-button" onClick={clearTimer}>
+            Clear
+          </button>
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -317,17 +323,17 @@ function Timer(props) {
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => renderNumberButton(num))}
           </div>
           <button
-            className={!inputtedSeconds ? 'disabled' : ''}
+            className={!inputtedSeconds ? 'big-button disabled' : 'big-button'}
             onClick={startTimerWithInputtedTime}>
-            Start Timer
+            Start
           </button>
-          <button onClick={clearTimeInput}>Clear</button>
+          <button className="big-button" onClick={clearTimeInput}>
+            Clear
+          </button>
         </React.Fragment>
       )}
 
-      <button className="back-button" onClick={handleOnBackPress}>
-        X
-      </button>
+      <button className="back-button" onClick={handleOnBackPress} />
     </div>
   );
 }

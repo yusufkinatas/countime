@@ -21,6 +21,7 @@
 }
 
 .App-container {
+  position: relative;
   background-color: var(--clr-bg);
   min-height: 100%;
   display: flex;

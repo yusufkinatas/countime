@@ -12,7 +12,7 @@
 }
 
 .time-input-container {
-  font-size: 100px;
+  font-size: 4em;
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
@@ -21,24 +21,6 @@
 .time-input-container .selected {
   background: var(--clr-text);
   color: var(--clr-bg);
-}
-
-
-
-.timerdata {
-  position: fixed;
-  bottom: 10px;
-}
-
-.back-button {
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  top: 10px;
-  left: 10px;
-  border:none;
-  font-size: 30px;
 }
 
 .number-buttons {
@@ -63,3 +45,68 @@
   padding:0; 
 }
 
+.back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding:0;
+  height: 2em;
+  width: 2em;
+  border-radius: 0 0 .3em 0;
+  border:none;
+}
+
+.back-button::before {
+  content: "";
+  display: inline-block;
+  background: url(../../assets/close.svg) 50% 50% no-repeat;
+  filter: invert();
+  width: 1em;
+  background-size: contain;
+  height: 100%;
+}
+
+.security-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding:0;
+  height: 2em;
+  width: 2em;
+  border-radius: 0 0 0 .3em;
+  border:none;
+}
+
+.security-button.unlock {
+  background: var(--clr-text);
+}
+
+.security-button.lock::before {
+  content: "";
+  display: inline-block;
+  background: url(../../assets/unlock.svg) 50% 50% no-repeat;
+  filter: invert();
+  width: 1em;
+  background-size: contain;
+  height: 100%;
+}
+
+.security-button.unlock::before {
+  content: "";
+  background: red;
+  display: inline-block;
+  background: url(../../assets/lock.svg) 50% 50% no-repeat;
+  filter: invert();
+  width: 1em;
+  background-size: contain;
+  height: 100%;
+}
+
+.big-button {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 500;
+  width: 80%;
+  height: 2em;
+  font-size: 1.5em;
+}
