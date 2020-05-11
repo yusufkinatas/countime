@@ -293,12 +293,12 @@ function Timer(props) {
       {timerData ? (
         <React.Fragment>
           {remainingSeconds === 0 ? (
-            <div>
+            <React.Fragment>
               <div className="timer">TIME'S UP</div>
               <button className="big-button" onClick={restartTimer}>
-                Restart ({timerData.duration})
+                Restart ({formatSeconds(timerData.duration)})
               </button>
-            </div>
+            </React.Fragment>
           ) : (
             <React.Fragment>
               <div className="timer">{formatSeconds(remainingSeconds)}</div>
@@ -323,7 +323,7 @@ function Timer(props) {
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => renderNumberButton(num))}
           </div>
           <button
-            className={!inputtedSeconds ? 'big-button disabled' : 'big-button'}
+            className={'big-button start' + (!inputtedSeconds ? ' disabled' : '')}
             onClick={startTimerWithInputtedTime}>
             Start
           </button>

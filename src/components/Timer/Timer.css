@@ -7,13 +7,13 @@
 }
 
 .timer {
-  font-size: 100px;
-  margin-bottom: 50px;
+  font-size: 4em;
+  margin-bottom: 1em;
 }
 
 .time-input-container {
   font-size: 4em;
-  margin-bottom: 50px;
+  margin-bottom: 1em;
   display: flex;
   flex-direction: row;
 }
@@ -27,17 +27,20 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
+  background: var(--clr-bg2);
+  padding: .7em 0 .1em;
 }
 
 .number-buttons * {
-  background: var(--clr-text);
-  color: var(--clr-bg);
-  font-size: 30px;
-  width: 18%;
-  height: 60px;
-  margin-bottom: 2%;  
+  background: var(--clr-bg);
+  color: var(--clr-bg2);
+  font-size: 1.8em;
+  font-weight: bold;
+  width: 17%;
+  height: 1.8em;
+  margin-bottom: .3em;  
   justify-content: center;
   align-items: center;
   display: flex;
@@ -106,7 +109,12 @@
   text-transform: uppercase;
   letter-spacing: .1em;
   font-weight: 500;
-  width: 80%;
+  width: 100%;
+  border-radius: 0;
   height: 2em;
   font-size: 1.5em;
+}
+
+.big-button.start {
+  margin-top: 1em;
 }

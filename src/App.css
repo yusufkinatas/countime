@@ -21,6 +21,7 @@
 }
 
 .App-container {
+  box-shadow: rgba(0, 0, 0, 0.56) 0 .3em 2em;
   position: relative;
   background-color: var(--clr-bg);
   min-height: 100%;
