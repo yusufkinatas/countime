@@ -1,15 +1,17 @@
 .aboutme-handle {
-    height: 30px;
+    height: 1.1em;
     cursor: pointer;
-    background: var(--clr-bg);
-    padding: 8px;
-    border-radius: 8px 8px 0 0;
+    background: var(--clr-bg2);
+    color: var(--clr-bg);
+    font-weight: 500;
+    padding: .3em .5em;
+    border-radius: .3em .3em 0 0;
     transition: 250ms all ease-in-out;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .aboutme-handle:hover {
-    box-shadow: 0px 0px 10px 0px #0000008c;
+    box-shadow: 0 0 .3em 0 #0000008c;
 }
 
 .aboutme-overlay {
@@ -27,10 +29,10 @@
     max-width: 600px;
     background: white;
     transition: 750ms all cubic-bezier(0.215, 0.610, 0.355, 1);
-    border-radius: 32px 32px 0 0;
+    border-radius: 1.1em 1.1em 0 0;
 }
 
 .aboutme-body.visible {
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 5px 40px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0 .3em 2em;
     transform: translateY(0);
 }
