@@ -36,7 +36,7 @@
     top: calc(50% - 5px);
     position: absolute;
     transform-origin: 0 50%;
-    animation: fontbulger 5s infinite linear ; 
+    animation: spin 5s infinite linear ; 
   }
   .load-spinner::before {
     content: "";
@@ -47,10 +47,10 @@
     top: calc(50% - 5px);
     position: absolute;
     transform-origin: 0 50%;
-    animation: fontbulger 3s infinite linear ; 
+    animation: spin 3s infinite linear ; 
   }
 
-  @keyframes fontbulger {
+  @keyframes spin {
     0% {
       transform: rotate(0deg);
     }
