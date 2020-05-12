@@ -295,7 +295,7 @@ function Timer(props) {
         <React.Fragment>
           {remainingSeconds === 0 ? (
             <React.Fragment>
-              <div className="timer">TIME'S UP</div>
+              <div className="time-container">TIME'S UP</div>
               <button className="big-button" onClick={restartTimer}>
                 Restart ({formatSeconds(timerData.duration)})
               </button>
