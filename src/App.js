@@ -88,15 +88,14 @@ function App() {
   };
 
   const handleInputKeyDown = e => {
-    switch (e.key) {
-      case ' ':
-        e.preventDefault();
-        break;
-      case 'Enter':
-        selectTimer();
-        break;
-      default:
-        break;
+    const regex = new RegExp(/^[a-zA-Z0-9_]*$/g);
+
+    if (!regex.test(e.key)) {
+      return e.preventDefault();
+    }
+
+    if (e.key === 'Enter') {
+      selectTimer();
     }
   };
 
