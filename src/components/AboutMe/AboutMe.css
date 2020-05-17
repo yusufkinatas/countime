@@ -21,18 +21,87 @@
 }
 
 .aboutme-body {
-    height: 50vh;
+    height: 60vh;
     bottom: 0;
-    transform: translateY(50vh);
+    transform: translateY(60vh);
     position: fixed;
     width: 100%;
     max-width: 600px;
     background: white;
     transition: 750ms all cubic-bezier(0.215, 0.610, 0.355, 1);
     border-radius: 1.1em 1.1em 0 0;
+    align-items: center;
+    overflow: scroll;
+}
+
+.aboutme-body p {
+    font-size: .8em;
+    max-width: 90%;
+    text-align: start;
+    margin-bottom: .5em;
+    
 }
 
 .aboutme-body.visible {
     box-shadow: rgba(0, 0, 0, 0.56) 0 .3em 2em;
     transform: translateY(0);
+}
+
+.filler {
+    flex: 1;
+}
+
+
+.social-buttons {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.social-buttons > a {
+    width: 32%;
+    height: 3.7em;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: 200ms all ease-in-out;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.social-buttons > a:hover {   
+    opacity: .9;
+}
+
+.social-buttons > a:hover img {    
+    padding: 1em 0;
+}
+
+
+.social-buttons span {
+    color: var(--clr-bg);
+    margin-top: .2em;
+   
+}
+
+.social-buttons img {
+    width: 30%;
+    height: auto;
+    filter: invert();
+    margin: auto;
+    transition: 200ms all ease-in-out;
+
+}
+
+.social-buttons .email {
+    background: var(--clr-bg2-darker);
+}
+
+.social-buttons .linkedin {
+    background: #0277b5;
+}
+
+.social-buttons .github {
+    background: #24292e;
 }
