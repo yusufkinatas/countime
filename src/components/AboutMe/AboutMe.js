@@ -32,16 +32,28 @@ function AboutMe() {
         </p>
         <div className="filler" />
         <div className="social-buttons">
-          <a className="email" href="mailto:yusufkinatas@gmail.com" target="_blank">
-            <img src={email} />
+          <a
+            className="email"
+            href="mailto:yusufkinatas@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img alt="email" src={email} />
             <span>E-Mail</span>
           </a>
-          <a className="linkedin" href="https://www.linkedin.com/in/yusuf-kinatas/" target="_blank">
-            <img src={linkedin} />
+          <a
+            className="linkedin"
+            href="https://www.linkedin.com/in/yusuf-kinatas/"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img alt="linkedin" src={linkedin} />
             <span>Linkedin</span>
           </a>
-          <a className="github" href="https://github.com/yusufkinatas" target="_blank">
-            <img src={github} />
+          <a
+            className="github"
+            href="https://github.com/yusufkinatas"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img alt="github" src={github} />
             <span>Github</span>
           </a>
         </div>
