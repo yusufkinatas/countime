@@ -122,6 +122,54 @@
   height: 100%;
 }
 
+.locked-alert {
+  background: #e84118;
+  color :white;
+  font-weight: 400;
+  height: 3em;
+  line-height: 3em;
+  position: absolute;
+  padding: 0 .3em;
+  border-radius: 0 0 0 .5em;
+  right: 0;
+  transform: translateX(5em);
+  transition: transform 250ms ease-out;  
+  cursor: pointer;
+}
+
+.locked-alert.visible {
+  transform: translateX(0);
+  animation: bump .75s normal linear; 
+}
+
+@keyframes bump {
+  0% {
+    transform: translateX(4.8em) scale(1);
+  }
+
+  25% {
+    transform: scale(1);
+  }
+
+  44% {
+    transform: scale(1.2);  
+  }
+
+  63% {
+    transform: scale(1);
+  }
+
+  82% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+  
+}
+
 .big-button {
   text-transform: uppercase;
   letter-spacing: .1em;

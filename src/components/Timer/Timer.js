@@ -7,6 +7,7 @@ import './Timer.css';
 import getTimeValues from 'utils/getTimeValues';
 
 let tickInterval;
+let alertTimeout;
 
 const bell = new Audio('/bell.mp3');
 bell.loop = true;
@@ -21,6 +22,7 @@ function Timer(props) {
   const [remainingSeconds, setRemainingSeconds] = useState(null);
   const [selectedInput, setSelectedInput] = useState('h'); //h-m-s
   const [timeInputs, setTimeInputs] = useState({ h: 0, m: 0, s: 0 });
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const databaseRef = firebase.database().ref(`/timers/${name}`);
 
@@ -98,6 +100,20 @@ function Timer(props) {
     };
   }, []);
 
+  const showAlert = () => {
+    setAlertVisible(true);
+
+    clearTimeout(alertTimeout);
+    alertTimeout = setTimeout(() => {
+      setAlertVisible(false);
+    }, 2000);
+  };
+
+  const hideAlert = () => {
+    clearTimeout(alertTimeout);
+    setAlertVisible(false);
+  };
+
   const startTimer = async seconds => {
     await databaseRef.set({
       duration: seconds,
@@ -116,18 +132,20 @@ function Timer(props) {
   };
 
   const restartTimer = () => {
+    if (timerData.pin) return showAlert();
+    
     startTimer(timerData.duration);
   };
 
   const clearTimer = async () => {
-    if (timerData.pin) return alert('LOCKED');
+    if (timerData.pin) return showAlert();
 
     clearTickInterval();
     await databaseRef.remove();
   };
 
   const pauseTimer = () => {
-    if (timerData.pin) return alert('LOCKED');
+    if (timerData.pin) return showAlert();
 
     clearTickInterval();
     databaseRef.update({
@@ -136,7 +154,7 @@ function Timer(props) {
   };
 
   const resumeTimer = () => {
-    if (timerData.pin) return alert('LOCKED');
+    if (timerData.pin) return showAlert();
 
     const msDifference = timerData.endsAt - timerData.pausedAt;
     databaseRef.update({
@@ -274,17 +292,21 @@ function Timer(props) {
     const pin = parseInt(prompt('enter pin'));
 
     if (pin !== timerData.pin) {
-      return alert('wrong password');
+      return showAlert();
     }
 
     databaseRef.update({ pin: '' });
   };
 
   const renderSecurityButton = () => {
-    if (timerData.pin) {
-      return <button className="security-button unlock" onClick={unlockTimer} />;
-    }
-    return <button className="security-button lock " onClick={lockTimer} />;
+    return (
+      <button
+        className={`security-button ${timerData.pin ? 'unlock' : 'lock'} ${
+          alertVisible ? ' alert' : ''
+        }`}
+        onClick={timerData.pin ? unlockTimer : lockTimer}
+      />
+    );
   };
 
   return (
@@ -293,6 +315,7 @@ function Timer(props) {
 
       {timerData ? (
         <React.Fragment>
+          {renderSecurityButton()}
           {remainingSeconds === 0 ? (
             <React.Fragment>
               <div className="time-container">TIME'S UP</div>
@@ -312,7 +335,6 @@ function Timer(props) {
                 onClick={timerData.pausedAt ? resumeTimer : pauseTimer}>
                 {timerData.pausedAt ? 'Resume' : 'Pause'}
               </button>
-              {renderSecurityButton()}
             </React.Fragment>
           )}
           <button className="big-button" onClick={clearTimer}>
@@ -338,6 +360,9 @@ function Timer(props) {
         </React.Fragment>
       )}
 
+      <div onClick={hideAlert} className={`locked-alert ${alertVisible ? ' visible' : ''}`}>
+        LOCKED
+      </div>
       <button className="back-button" onClick={handleOnBackPress} />
     </div>
   );
