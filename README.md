@@ -1,4 +1,4 @@
-This project it live at [https://countime.yusuf.app/](https://countime.yusuf.app/)
+This project is live at [https://countime.yusuf.app/](https://countime.yusuf.app/)
 
 ## How to start project on local
 
