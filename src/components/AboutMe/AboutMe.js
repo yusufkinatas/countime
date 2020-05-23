@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
+
 import email from 'assets/email.png';
 import linkedin from 'assets/linkedin.png';
 import github from 'assets/github.png';
-
 import './AboutMe.css';
 
 function AboutMe() {
@@ -15,10 +16,10 @@ function AboutMe() {
   return (
     <React.Fragment>
       {visible && <div onClick={hide} className="aboutme-overlay" />}
-      <div onClick={toggle} className={'aboutme-handle' + (visible ? ' visible' : '')}>
+      <div onClick={toggle} className={clsx('aboutme-handle', visible && 'visible')}>
         About Me
       </div>
-      <div className={'aboutme-body ' + (visible ? ' visible' : '')}>
+      <div className={clsx('aboutme-body', visible && 'visible')}>
         <div className="aboutme-content">
           <p>
             Hi, I am Yusuf. A software developer from Turkey. I'm developing software for different

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import formatSeconds from 'utils/formatSeconds';
 
-import './Timer.css';
+import Modal from 'components/Modal';
+import formatSeconds from 'utils/formatSeconds';
 import getTimeValues from 'utils/getTimeValues';
+import './Timer.css';
 
 let tickInterval;
 let alertTimeout;
@@ -23,6 +25,8 @@ function Timer(props) {
   const [selectedInput, setSelectedInput] = useState('h'); //h-m-s
   const [timeInputs, setTimeInputs] = useState({ h: 0, m: 0, s: 0 });
   const [alertVisible, setAlertVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [pin, setPin] = useState('');
 
   const databaseRef = firebase.database().ref(`/timers/${name}`);
 
@@ -133,7 +137,7 @@ function Timer(props) {
 
   const restartTimer = () => {
     if (timerData.pin) return showAlert();
-    
+
     startTimer(timerData.duration);
   };
 
@@ -275,21 +279,21 @@ function Timer(props) {
     return (
       <div
         onClick={() => setSelectedInput(type)}
-        className={type + (selectedInput === type ? ' selected' : '')}>
+        className={clsx(type, selectedInput === type && 'selected')}>
         {String(timeInputs[type]).padStart(2, '0')}
       </div>
     );
   };
 
   const lockTimer = () => {
-    const pin = parseInt(prompt('enter pin'));
     if (!pin) return;
 
+    hideModal();
     databaseRef.update({ pin });
   };
 
   const unlockTimer = () => {
-    const pin = parseInt(prompt('enter pin'));
+    hideModal();
 
     if (pin !== timerData.pin) {
       return showAlert();
@@ -298,13 +302,32 @@ function Timer(props) {
     databaseRef.update({ pin: '' });
   };
 
+  const showModal = () => {
+    setModalVisible(true);
+    setPin('');
+  };
+
+  const hideModal = () => setModalVisible(false);
+
+  const handlePinChange = e => {
+    setPin(e.target.value);
+  };
+
+  const handlePinInputKeyDown = e => {
+    if (e.key === 'Enter') {
+      timerData.pin ? unlockTimer() : lockTimer();
+    }
+  };
+
   const renderSecurityButton = () => {
     return (
       <button
-        className={`security-button ${timerData.pin ? 'unlock' : 'lock'} ${
-          alertVisible ? ' alert' : ''
-        }`}
-        onClick={timerData.pin ? unlockTimer : lockTimer}
+        className={clsx(
+          'security-button',
+          timerData.pin ? 'unlock' : 'lock',
+          alertVisible && 'alert'
+        )}
+        onClick={showModal}
       />
     );
   };
@@ -350,7 +373,7 @@ function Timer(props) {
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => renderNumberButton(num))}
           </div>
           <button
-            className={'big-button start' + (!inputtedSeconds ? ' disabled' : '')}
+            className={clsx('big-button start', !inputtedSeconds && 'disabled')}
             onClick={startTimerWithInputtedTime}>
             Start
           </button>
@@ -360,10 +383,29 @@ function Timer(props) {
         </React.Fragment>
       )}
 
-      <div onClick={hideAlert} className={`locked-alert ${alertVisible ? ' visible' : ''}`}>
+      <div onClick={hideAlert} className={clsx('locked-alert', alertVisible && 'visible')}>
         LOCKED
       </div>
       <button className="back-button" onClick={handleOnBackPress} />
+
+      {timerData && (
+        <Modal visible={modalVisible} onOverlay={hideModal}>
+          <h1>{timerData.pin ? 'Unlock Timer' : 'Lock Timer'}</h1>
+          <input
+            onKeyDown={handlePinInputKeyDown}
+            autoFocus
+            onChange={handlePinChange}
+            value={pin}
+            placeholder="Enter Pin"
+          />
+          <div>
+            <div onClick={hideModal}>Cancel</div>
+            <div onClick={timerData.pin ? unlockTimer : lockTimer}>
+              {timerData.pin ? 'Unlock' : 'Lock'}
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

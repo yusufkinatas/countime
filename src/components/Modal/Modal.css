@@ -1,0 +1,22 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right: 0;
+  background: #000d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}
+
+.overlay.visible {
+  opacity: 1;
+}
+
+.container {
+  background: white;
+  width: 100%;
+}

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
+
 import './LoadingOverlay.css';
 
 function LoadingOverlay({ loading }) {
@@ -23,7 +25,7 @@ function LoadingOverlay({ loading }) {
   if (destroyed) return null;
 
   return (
-    <div className={'load-overlay ' + (localLoading ? 'visible' : '')}>
+    <div className={clsx('load-overlay', localLoading && 'visible')}>
       <div className="load-spinner" />
     </div>
   );
