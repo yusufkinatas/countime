@@ -165,9 +165,7 @@
 
   100% {
     transform: scale(1);
-  }
-
-  
+  }  
 }
 
 .big-button {
@@ -182,4 +180,41 @@
 
 .big-button.start {
   margin-top: 1em;
+}
+
+.modalTitle {
+ margin: .3em 0 .5em;
+}
+
+.modalInput {
+  display: inline-block;
+  font-size: 1em;
+  border: none;
+
+  margin-left: 20%;
+  margin-bottom: 1em;
+  width: 60%;
+  
+  border-bottom: .01em solid var(--clr-text2);
+  outline: none;
+}
+
+.modalInput::placeholder {
+  color: unset !important;
+}
+
+.modalButtons {
+  flex-direction: row;
+}
+
+.modalButtons div {
+  cursor: pointer;
+  flex: 1;
+  padding: .3em 0;
+  transition: 200ms all;
+}
+
+.modalButtons div:hover {
+  opacity: .8;
+  background: #f0f0f0;
 }

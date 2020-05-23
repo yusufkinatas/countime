@@ -390,15 +390,16 @@ function Timer(props) {
 
       {timerData && (
         <Modal visible={modalVisible} onOverlay={hideModal}>
-          <h1>{timerData.pin ? 'Unlock Timer' : 'Lock Timer'}</h1>
+          <h3 className="modalTitle">{timerData.pin ? 'Unlock Timer' : 'Lock Timer'}</h3>
           <input
+            className="modalInput"
             onKeyDown={handlePinInputKeyDown}
             autoFocus
             onChange={handlePinChange}
             value={pin}
             placeholder="Enter Pin"
           />
-          <div>
+          <div className="modalButtons">
             <div onClick={hideModal}>Cancel</div>
             <div onClick={timerData.pin ? unlockTimer : lockTimer}>
               {timerData.pin ? 'Unlock' : 'Lock'}
