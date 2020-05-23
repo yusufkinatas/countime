@@ -110,11 +110,12 @@ function Timer(props) {
     clearTimeout(alertTimeout);
     alertTimeout = setTimeout(() => {
       setAlertVisible(false);
-    }, 2000);
+    }, 1000);
   };
 
   const hideAlert = () => {
     clearTimeout(alertTimeout);
+    alertTimeout = null;
     setAlertVisible(false);
   };
 

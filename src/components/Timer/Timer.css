@@ -133,39 +133,41 @@
   border-radius: 0 0 0 .5em;
   right: 0;
   transform: translateX(5em);
-  transition: transform 250ms ease-out;  
   cursor: pointer;
 }
 
 .locked-alert.visible {
-  transform: translateX(0);
-  animation: bump .75s normal linear; 
+  animation: bump 1s normal ease-in-out; 
 }
 
 @keyframes bump {
   0% {
-    transform: translateX(4.8em) scale(1);
+    transform: translateX(5em);
   }
 
   25% {
-    transform: scale(1);
+    transform: translateX(0);
   }
 
-  44% {
-    transform: scale(1.2);  
+  37% {
+    transform: scale(1.2) ;
   }
 
-  63% {
-    transform: scale(1);
+  50% {
+    transform: scale(1) ;
   }
 
-  82% {
-    transform: scale(1.2);
+  62% {
+    transform: scale(1.2) ;
+  }
+
+  75% {
+    transform:  scale(1) ;
   }
 
   100% {
-    transform: scale(1);
-  }  
+    transform: translateX(5em);
+  } 
 }
 
 .big-button {
