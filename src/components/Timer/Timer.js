@@ -250,11 +250,6 @@ function Timer(props) {
   };
 
   const handleNumberPress = num => {
-    if (selectedInput === 'h') {
-      setTimeInputs({ ...timeInputs, h: num });
-      return tryToSelectNextTimer();
-    }
-
     let newValue = timeInputs[selectedInput] * 10 + num;
     if (newValue > 99) {
       newValue = num;
